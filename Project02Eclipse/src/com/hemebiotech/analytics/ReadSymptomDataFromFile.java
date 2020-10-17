@@ -34,39 +34,32 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	 * 
 	 * @return a List of String of symptoms
 	 */
-	public List<String> GetSymptoms() {
+	public List<String> getSymptoms() {
 		BufferedReader reader = null;
 		File file = new File(filepath);
 		try {
 			reader = new BufferedReader(new FileReader(file));
-		} catch (FileNotFoundException e) {
-			System.err.printf("The file %s was not found.", file.toString());
-			System.exit(-1);
-		}
-		String line = null;
-		try {
+			String line = null;
 			line = reader.readLine();
 			while (line != null) {
 				System.out.println("Processing line: " + line);
-
-				if (line == null || line.trim().equals("")) {
-					continue;
-				}
 				String processed = line.toLowerCase();
-
 				symptomsList.add(processed);
-
 				line = reader.readLine(); // get another symptom
 			}
+		} catch (FileNotFoundException e) {
+			System.err.printf("The file %s was not found.", file.toString());
+			System.exit(-1);
 		} catch (IOException e) {
 			System.err.printf("The file %s cannot be read.", file.toString());
 			System.exit(-1);
-		}
-		try {
-			reader.close();
-		} catch (IOException e1) {
-			System.err.printf("The file %s cannot be closed.", file.toString());
-			System.exit(-1);
+		} finally {
+			try {
+				reader.close();
+			} catch (IOException e1) {
+				System.err.printf("The file %s cannot be closed.", file.toString());
+				System.exit(-1);
+			}
 		}
 		return symptomsList;
 	}

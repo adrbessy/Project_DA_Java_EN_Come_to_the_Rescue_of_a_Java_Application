@@ -12,7 +12,7 @@ import java.util.TreeMap;
  * @author adrien
  * @version 2.0
  */
-public class WriteSymptomOccurrenceToFile {
+public class WriteSymptomOccurrenceToFile implements ISymptomWriter {
 
 	private TreeMap<String, Integer> symptomsCounts;
 	private String filepath;
@@ -44,12 +44,13 @@ public class WriteSymptomOccurrenceToFile {
 		} catch (IOException e) {
 			System.err.printf("Impossible to write in the file %s.", file.toString());
 			System.exit(-1);
-		}
-		try {
-			writer.close();
-		} catch (IOException e) {
-			System.err.printf("The file %s cannot be closed.", file.toString());
-			System.exit(-1);
+		} finally {
+			try {
+				writer.close();
+			} catch (IOException e) {
+				System.err.printf("The file %s cannot be closed.", file.toString());
+				System.exit(-1);
+			}
 		}
 	}
 

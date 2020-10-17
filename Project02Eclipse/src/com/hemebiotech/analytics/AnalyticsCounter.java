@@ -15,13 +15,13 @@ public class AnalyticsCounter {
 
 	public static void main(String[] args) {
 
-		ReadSymptomDataFromFile readSymptomDataFromFile = new ReadSymptomDataFromFile("Project02Eclipse/symptoms.txt");
-		List<String> symptomsList = readSymptomDataFromFile.GetSymptoms();
+		ISymptomReader readSymptomDataFromFile = new ReadSymptomDataFromFile("Project02Eclipse/symptoms.txt");
+		List<String> symptomsList = readSymptomDataFromFile.getSymptoms();
 
 		SymptomCounter symptomCounter = new SymptomCounter(symptomsList);
-		TreeMap<String, Integer> symptomsCounts = symptomCounter.GetSymptomOccurrences();
+		TreeMap<String, Integer> symptomsCounts = symptomCounter.getSymptomOccurrences();
 
-		WriteSymptomOccurrenceToFile writeSymptomOccurrenceToFile = new WriteSymptomOccurrenceToFile(
+		ISymptomWriter writeSymptomOccurrenceToFile = new WriteSymptomOccurrenceToFile(
 				"Project02Eclipse/symptom_occurrence.out", symptomsCounts);
 		writeSymptomOccurrenceToFile.writeOccurences();
 	}

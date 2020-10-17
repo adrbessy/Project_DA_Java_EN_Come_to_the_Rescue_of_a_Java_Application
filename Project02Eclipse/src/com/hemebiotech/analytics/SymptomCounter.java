@@ -31,7 +31,7 @@ public class SymptomCounter {
 	 * @return a tree map object containing the occurrences associated to each
 	 *         symptom
 	 */
-	public TreeMap<String, Integer> GetSymptomOccurrences() {
+	public TreeMap<String, Integer> getSymptomOccurrences() {
 		for (String symptom : symptomsList) {
 			System.out.println("Processing line: " + symptom);
 			if (symptomsCounts.containsKey(symptom)) {
